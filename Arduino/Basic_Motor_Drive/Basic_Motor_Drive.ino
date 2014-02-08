@@ -27,7 +27,9 @@ void loop() {
   
   Serial.print("tick");
   
-  motor.run(FORWARD);
+  motor0.run(FORWARD);
+  motor120.run(FORWARD);
+  motor240.run(FORWARD);
   for (i=0; i<255; i++) {
     motor0.setSpeed(i);
     motor120.setSpeed(i);
@@ -44,7 +46,9 @@ void loop() {
   
   Serial.print("tock");
 
-  motor.run(BACKWARD);
+  motor0.run(BACKWARD);
+  motor120.run(BACKWARD);
+  motor240.run(BACKWARD);
   for (i=0; i<255; i++) {
     motor0.setSpeed(i);
     motor120.setSpeed(i);
