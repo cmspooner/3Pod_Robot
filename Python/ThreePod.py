@@ -23,8 +23,8 @@ class ThreePod():
 		self.speed = float(speed)
 		self.angle = float(math.radians(angle))
 		
-		#self.speedx = ~Math
-		#self.speedy = ~Math
+		self.speedx = math.cos(self.angle)
+		self.speedy = math.sin(self.angle)
 		
 	def moveXY(self, x, y):
 		self.speedx = float(x)
