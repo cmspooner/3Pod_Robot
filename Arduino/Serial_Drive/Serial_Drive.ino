@@ -1,6 +1,3 @@
-// Adafruit Motor shield library
-// copyright Adafruit Industries LLC, 2009
-// this code is public domain, enjoy!
 // Based on Motor Test Example
 #include <AFMotor.h>
 
@@ -8,18 +5,41 @@ AF_DCMotor motor0(3);
 AF_DCMotor motor120(4);
 AF_DCMotor motor240(1);
 
+String inputString = "";         // a string to hold incoming data
+boolean stringComplete = false;  // whether the string is complete
+
 void setup() {
   Serial.begin(9600);           // set up Serial library at 9600 bps
   Serial.println("Waiting for Serial Data");
+  inputString.reserve(200);
 }
 
 void loop() {
-  runSerialCommand("90,-120,-25");
-  delay(1000);
+  if (stringComplete) {
+    Serial.println(inputString);
+    runSerialCommand(inputString);
+    // clear the string:
+    inputString = "";
+    stringComplete = false;
+  }
+}
+
+void serialEvent() {
+  while (Serial.available()) {
+    // get the new byte:
+    char inChar = (char)Serial.read(); 
+    // add it to the inputString:
+    inputString += inChar;
+    // if the incoming character is a newline, set a flag
+    // so the main loop can do something about it:
+    if (inChar == '\n') {
+      stringComplete = true;
+    } 
+  }
 }
 
 void runSerialCommand(String command){
-  int motorCommands[3];
+  int motorCommands[3] = {0,0,0};
   String tmpStr;
   int cmdNum = 0;
   for (int i = 0; i < command.length(); i++){
