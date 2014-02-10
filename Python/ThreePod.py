@@ -1,3 +1,5 @@
+import math
+
 class ThreePod():
 	def __init__(self):
 		#Cartesian Coordinate System 
@@ -9,7 +11,7 @@ class ThreePod():
 		self.speed  = 0
 		
 		#Rotation on Axis
-		self.rotation = 0
+		self.speedRot = 0
 		
 	def __str__(self, coordSys = "polar"):
 		if coodSys == "polar":
@@ -17,22 +19,27 @@ class ThreePod():
 		if coodSys == "xy":
 			return self.speedx, self.speedy, self.rot
 			
-	def movePolar(speed, angle)
-		self.speed = speed
-		self.angle = angle
+	def movePolar(self, speed, angle)
+		self.speed = float(speed)
+		self.angle = float(angle)
 		
 		#self.speedx = ~Math
 		#self.speedy = ~Math
 		
-	def moveXY(x, y):
-		self.speedx = x
-		self.speedy = y
+	def moveXY(self, x, y):
+		self.speedx = float(x)
+		self.speedy = float(y)
 		
-		#self.speed = ~Math
-		#self.angle = ~Math
-		
-	def update():
+		self.speed = math.sqrt((self.speedx**2)+(self.speedy**2))
+		#self.angle = arctan(self.speedy/self.speedx) ~Only good for first quadrant
+			
+	def moveRotate(self, speed):
+		self.speedRot = speed
+	
+	def drive(self):
 		moveString = ""
+		 
+		 # ~Math to convert speed to motor speeds 
 		
 		return moveString
 		
