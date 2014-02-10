@@ -14,10 +14,7 @@ void setup() {
 }
 
 void loop() {
-  rawMotorDrive(2,0,0, false);
-  rawMotorDrive(255,0,-255);
-  rawMotorDrive(0,-120, 190);
-  rawMotorDrive(-270,500,0);
+  runSerialCommand("90,-120,-25");
   delay(1000);
 }
 
@@ -25,8 +22,20 @@ void runSerialCommand(String command){
   int motorCommands[3];
   String tmpStr;
   int cmdNum = 0;
+  for (int i = 0; i < command.length(); i++){
+    if (command.charAt(i) == ','){
+      motorCommands[cmdNum] = tmpStr.toInt();
+      cmdNum += 1;
+      tmpStr = "";
+    } else {
+      tmpStr += command.charAt(i);
+    }
+  }  
+  motorCommands[cmdNum] = tmpStr.toInt();
   
+  rawMotorDrive(motorCommands[0], motorCommands[1], motorCommands[2], true);
 }
+
 
 void rawMotorDrive(int m0, int m120, int m240){
  if (m0 > 0){
@@ -88,7 +97,7 @@ void rawMotorDrive(int m0, int m120, int m240){
 void rawMotorDrive(int m0, int m120, int m240, boolean debug){
  if (m0 > 0){
   motor0.run(FORWARD);
-  if (debug) Serial.print("M0 F: ");
+  if (debug) Serial.print("M0 F ");
   if (m0 < 255){
     motor0.setSpeed(m0);
     if (debug) Serial.print(m0);
@@ -98,10 +107,10 @@ void rawMotorDrive(int m0, int m120, int m240, boolean debug){
   }
  } else if (m0 < 0){
    motor0.run(BACKWARD);
-   if (debug) Serial.print("M0 B: ");
+   if (debug) Serial.print("M0 B ");
   if (m0 > -255){
-    motor0.setSpeed(m0);
-    if (debug) Serial.print(m0);
+    motor0.setSpeed(abs(m0));
+    if (debug) Serial.print(abs(m0));
   } else {
     motor0.setSpeed(255);
     if (debug) Serial.print(255);
@@ -114,7 +123,7 @@ void rawMotorDrive(int m0, int m120, int m240, boolean debug){
  
  if (m120 > 0){
   motor120.run(FORWARD);
-  if (debug) Serial.print("M120 F: ");
+  if (debug) Serial.print("M120 F ");
   if (m120 < 255){
     motor120.setSpeed(m120);
     if (debug) Serial.print(m120);
@@ -124,10 +133,10 @@ void rawMotorDrive(int m0, int m120, int m240, boolean debug){
   }
  } else if (m120 < 0){
    motor120.run(BACKWARD);
-   if (debug) Serial.print("M120 B: ");
+   if (debug) Serial.print("M120 B ");
   if (m120 > -255){
-    motor120.setSpeed(m120);
-    if (debug) Serial.print(m120);
+    motor120.setSpeed(abs(m120));
+    if (debug) Serial.print(abs(m120));
   } else {
     motor120.setSpeed(255);
     if (debug) Serial.print(255);
@@ -140,7 +149,7 @@ void rawMotorDrive(int m0, int m120, int m240, boolean debug){
  
  if (m240 > 0){
   motor240.run(FORWARD);
-  if (debug) Serial.print("M240 F: ");
+  if (debug) Serial.print("M240 F ");
   if (m240 < 255){
     motor240.setSpeed(m240);
     if (debug) Serial.println(m240);
@@ -150,13 +159,13 @@ void rawMotorDrive(int m0, int m120, int m240, boolean debug){
   }
  } else if (m240 < 0){
    motor240.run(BACKWARD);
-   if (debug) Serial.print("M240 B: ");
+   if (debug) Serial.print("M240 B ");
   if (m240 > -255){
-    motor240.setSpeed(m240);
-    if (debug) Serial.println(m240);
+    motor240.setSpeed(abs(m240));
+    if (debug) Serial.println(abs(m240));
   } else {
     motor240.setSpeed(255);
-    if (debug) Serial.println(m240);
+    if (debug) Serial.println(255);
   }
  } else {
    motor240.run(RELEASE);
