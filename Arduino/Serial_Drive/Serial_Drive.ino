@@ -1,5 +1,3 @@
-#include <AFMotor.h>
-
 // Adafruit Motor shield library
 // copyright Adafruit Industries LLC, 2009
 // this code is public domain, enjoy!
@@ -21,6 +19,13 @@ void loop() {
   rawMotorDrive(0,-120, 190);
   rawMotorDrive(-270,500,0);
   delay(1000);
+}
+
+void runSerialCommand(String command){
+  int motorCommands[3];
+  String tmpStr;
+  int cmdNum = 0;
+  
 }
 
 void rawMotorDrive(int m0, int m120, int m240){
