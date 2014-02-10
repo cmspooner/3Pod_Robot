@@ -21,7 +21,7 @@ class ThreePod():
 			
 	def movePolar(self, speed, angle)
 		self.speed = float(speed)
-		self.angle = float(angle)
+		self.angle = float(math.radians(angle))
 		
 		#self.speedx = ~Math
 		#self.speedy = ~Math
@@ -31,7 +31,13 @@ class ThreePod():
 		self.speedy = float(y)
 		
 		self.speed = math.sqrt((self.speedx**2)+(self.speedy**2))
-		#self.angle = arctan(self.speedy/self.speedx) ~Only good for first quadrant
+		if self.speedx != 0:
+			self.angle = arctan(self.speedy/self.speedx)
+		else:
+			if self.speedy > 0:
+				self.angle = math.radians(90)
+			elif self.speedy < 0:
+				self.angle = math.radian(270)
 			
 	def moveRotate(self, speed):
 		self.speedRot = speed
