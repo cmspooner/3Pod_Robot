@@ -19,7 +19,7 @@ class ThreePod():
 		if coodSys == "xy":
 			return self.speedx, self.speedy, self.rot
 			
-	def movePolar(self, speed, angle)
+	def movePolar(self, speed, angle):
 		self.speed = float(speed)
 		self.angle = float(math.radians(angle))
 		
@@ -32,7 +32,7 @@ class ThreePod():
 		
 		self.speed = math.sqrt((self.speedx**2)+(self.speedy**2))
 		if self.speedx != 0:
-			self.angle = arctan(self.speedy/self.speedx)
+			self.angle = math.atan(self.speedy/self.speedx)
 		else:
 			if self.speedy > 0:
 				self.angle = math.radians(90)
@@ -42,10 +42,19 @@ class ThreePod():
 	def moveRotate(self, speed):
 		self.speedRot = speed
 	
-	def drive(self):
-		moveString = ""
+	def drive(self):		
+		m0angle = self.angle + math.radians(0)
+		m120angle = self.angle + math.radians(120)
+		m240angle = self.angle + math.radians(240)
+		
+		m0speed = self.speed * math.sin(m0angle)
+		m120speed = self.speed * math.sin(m120angle)
+		m240speed = self.speed * math.sin(m240angle)
 		 
-		 # ~Math to convert speed to motor speeds 
+		moveString = "" 
+		moveString += str(int(m0speed)) + ',' 
+		moveString += str(int(m120speed)) + ',' 
+		moveString += str(int(m240speed)) 
 		
 		return moveString
 		
