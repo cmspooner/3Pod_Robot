@@ -1,7 +1,7 @@
 import serial, math
 from ThreePod import ThreePod
 
-robot = ThreePod()
+robot = ThreePod(True)
 
 robot.moveXY(255,0)
 print robot.drive()
