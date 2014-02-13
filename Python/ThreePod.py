@@ -52,16 +52,16 @@ class ThreePod():
 		self.speedRot = speed
 	
 	def drive(self):		
-		m0angle = self.angle + math.radians(0)
-		m120angle = self.angle + math.radians(120)
-		m240angle = self.angle + math.radians(240)
+		m0angle = self.angle - math.radians(0)
+		m120angle = self.angle - math.radians(120)
+		m240angle = self.angle - math.radians(240)
 		
 		m0speed = self.speed * math.sin(m0angle)
 		m120speed = self.speed * math.sin(m120angle)
 		m240speed = self.speed * math.sin(m240angle)
-		if self.debug: print "0======> ", math.sin(m0angle)
-		if self.debug: print "120====> ", math.sin(m120angle)
-		if self.debug: print "240====> ", math.sin(m240angle)
+		if self.debug: print "0======> ", math.degrees(m0angle), math.sin(m0angle)
+		if self.debug: print "120====> ", math.degrees(m120angle),math.sin(m120angle)
+		if self.debug: print "240====> ", math.degrees(m240angle),math.sin(m240angle)
 		 
 		moveString = "" 
 		moveString += str(int(m0speed)) + ',' 
