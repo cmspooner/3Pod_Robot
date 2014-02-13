@@ -2,6 +2,7 @@ import serial, math
 from ThreePod import ThreePod
 
 robot = ThreePod(True)
+serialPort = serial.Serial(0) #first port available
 
 if False: #XY Test
 	print "255,0"
