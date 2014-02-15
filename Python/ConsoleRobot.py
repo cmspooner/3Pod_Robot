@@ -75,24 +75,38 @@ t = .5
 def cleanInput(input):
 	input = input.lower()
 	
-	# ~ go though input and remove non-numerals and mae comas spaces
+	clean = False
+	previousC = ""
+	while not clean:
+		newInput = ""
+		clean = True
+		for c in input:
+			clean = True
+			if c == ",":
+				newInput += " "
+				clean = False
+			elif c == " " and previousC == " ":
+				clean = False
+			else:
+				newInput += c
+			previousC = c
+		input = newInput
 	
 	if " " in input:
 		input = input.split(" ")
 	else:
 		input = [input]
+		
+	return input
 	
 
 def helper(command = None):
-	pass
+	print "help - Display this help message"
+	print "xy <x> <y> [<time>] - Move on a cartesion plane, optional time in seconds, default time 0.5s"
+	print "polar <speed> <angle> [<time>] - Move on a Polar plane, optional time in seconds, default time 0.5s"
 	
-def XY(x, y):
-	robot.moveXY(x,y)
-	return robot.drive()
-	
+	return
 
-def Polar(command = None):
-	pass
 
 
 if True: #serialPort.isOpen():
@@ -101,20 +115,34 @@ if True: #serialPort.isOpen():
 		input = cleanInput(raw_input("> "))		
 		
 		# Run command
+		print input
+		print
 		if input[0] == "help":
 			result = helper(input[1:])
 		elif input[0] == "xy":
-			if len(input) < 2:
-				print "XY takes at least two arguments"
+			if len(input) < 3 or len(input) > 4:
+				print "Abnormal number of parameters, xy takes 2 or 3 arguments"
 			else:
-				result = XY(input[1], input[2])
-			if len(input) >= 3:
-				time = input[3]
+				robot.moveXY(input[1], input[2])
+			if len(input) > 3:
+				t = input[3]
 		elif input[0] == "polar":
-			result = Polar(input[1:])
-			
+			if len(input) < 3 or len(input) > 4:
+				print "Abnormal number of parameters, xy takes 2 or 3 arguments"
+			else:
+				robot.movePolar(input[1], input[2])
+			if len(input) > 3:
+				t = input[3]
+		elif input[0] == "quit":
+			robot.moveXY(0,0)
+			t = 0
+		
 		# Send command
+		result = robot.drive()
+		print result
 		#serialPort.write(result)
+		t = float(t)
+		print "waiting", t, "seconds"
 		time.sleep(t)
 		
 		
