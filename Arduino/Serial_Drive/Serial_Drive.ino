@@ -5,6 +5,11 @@ AF_DCMotor motor0(3);
 AF_DCMotor motor120(4);
 AF_DCMotor motor240(1);
 
+#define BLUE_TOOTH_PWR 14
+#define BLUE_TOOTH_GND 15
+#define BLUE_TOOTH_TX 16
+#define BLUT_TOOTH_RX 17
+
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
 
@@ -12,6 +17,11 @@ void setup() {
   Serial.begin(9600);           // set up Serial library at 9600 bps
   Serial.println("Waiting for Serial Data");
   inputString.reserve(200);
+  pinMode( BLUE_TOOTH_PWR, OUTPUT );
+  pinMode( BLUE_TOOTH_GND, OUTPUT );
+  
+  digitalWrite( BLUE_TOOTH_PWR, HIGH );
+  digitalWrite( BLUE_TOOTH_GND, LOW );
 }
 
 void loop() {
