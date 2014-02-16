@@ -12,7 +12,7 @@ FILE_NAME(
 /* name */ 
 'C:\\Users\\Spooner\\Documents\\Inventor\\FerretBall Robot\\3Pod\\STPs
 \\Full Motor Arm (1 inch) with Flexiwheel.iam.stp',
-/* time_stamp */ '2014-02-16T10:53:05-05:00',
+/* time_stamp */ '2014-02-16T18:43:22-05:00',
 /* author */ ('Spooner'),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v15.2',
@@ -8519,7 +8519,7 @@ SURFACE()
 #7887=DIRECTION('ref_axis',(1.,0.,0.));
 #7888=DIRECTION($,(0.377964473009236,-0.654653670707975,0.654653670707975));
 #7889=DIRECTION($,(1.,0.,0.));
-#7890=DIRECTION('center_axis',(0.61237243569579,0.707106781186553,0.353553390593272));
+#7890=DIRECTION('center_axis',(0.61237243569579,0.707106781186553,0.353553390593271));
 #7891=DIRECTION('ref_axis',(0.5,0.,-0.866025403784438));
 #7892=DIRECTION($,(0.5,0.,-0.866025403784438));
 #7893=DIRECTION($,(0.755928946018457,-0.654653670707974,2.28917032559171E-015));

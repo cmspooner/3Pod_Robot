@@ -13,7 +13,7 @@ FILE_NAME(
 'C:\\Users\\Spooner\\Documents\\Inventor\\FerretBall Robot\\3Pod\\STPs
 \\Full Chassis with Arduino, Gyro, 1 inch Arms, and Flexiwheels.iam.st
 p',
-/* time_stamp */ '2014-02-16T10:52:59-05:00',
+/* time_stamp */ '2014-02-16T18:43:16-05:00',
 /* author */ ('Spooner'),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v15.2',
@@ -12780,7 +12780,7 @@ REPRESENTATION_ITEM($)
 #11855=DIRECTION('ref_axis',(1.,0.,0.));
 #11856=DIRECTION($,(0.377964473009236,-0.654653670707975,0.654653670707975));
 #11857=DIRECTION($,(1.,0.,0.));
-#11858=DIRECTION('center_axis',(0.61237243569579,0.707106781186553,0.353553390593272));
+#11858=DIRECTION('center_axis',(0.61237243569579,0.707106781186553,0.353553390593271));
 #11859=DIRECTION('ref_axis',(0.5,0.,-0.866025403784438));
 #11860=DIRECTION($,(0.5,0.,-0.866025403784438));
 #11861=DIRECTION($,(0.755928946018457,-0.654653670707974,2.28917032559171E-015));
