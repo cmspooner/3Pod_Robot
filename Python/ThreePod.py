@@ -15,6 +15,14 @@ class ThreePod():
 		
 		self.debug = debug
 		
+		self.m0angle = self.angle - math.radians(0)
+		self.m120angle = self.angle - math.radians(120)
+		self.m240angle = self.angle - math.radians(240)
+		
+		self.m0speed = 0
+		self.m120speed = 0
+		self.m240speed = 0
+		
 	def __str__(self, coordSys = "polar"):
 		if coodSys == "polar":
 			return self.speed, self.angle
@@ -23,10 +31,12 @@ class ThreePod():
 			
 	def movePolar(self, speed, angle):
 		self.speed = float(speed)
-		self.angle = float(math.radians(angle))
+		self.angle = float(math.radians(float(angle)))
 		
 		self.speedx = math.cos(self.angle)
 		self.speedy = math.sin(self.angle)
+		
+		self.moveRaw()
 		
 	def moveXY(self, x, y):
 		self.speedx = float(x)
@@ -47,26 +57,35 @@ class ThreePod():
 				self.angle = math.radians(90)
 			elif self.speedy < 0:
 				self.angle = math.radian(270)
+		
+		self.moveRaw()
 			
 	def moveRotate(self, speed):
 		self.speedRot = speed
-	
-	def drive(self):		
-		m0angle = self.angle - math.radians(0)
-		m120angle = self.angle - math.radians(120)
-		m240angle = self.angle - math.radians(240)
 		
-		m0speed = self.speed * math.sin(m0angle)
-		m120speed = self.speed * math.sin(m120angle)
-		m240speed = self.speed * math.sin(m240angle)
-		if self.debug: print "0======> ", math.degrees(m0angle), math.sin(m0angle)
-		if self.debug: print "120====> ", math.degrees(m120angle),math.sin(m120angle)
-		if self.debug: print "240====> ", math.degrees(m240angle),math.sin(m240angle)
+	def moveRaw(self, m0 = None, m120 = None, m240 = None):
+		self.m0angle = self.angle - math.radians(0)
+		self.m120angle = self.angle - math.radians(120)
+		self.m240angle = self.angle - math.radians(240)
+		
+		if not m0 or not m120 or not m240:
+			self.m0speed = self.speed * math.sin(self.m0angle)
+			self.m120speed = self.speed * math.sin(self.m120angle)
+			self.m240speed = self.speed * math.sin(self.m240angle)
+		else:
+			self.m0speed = m0
+			self.m120speed = m120
+			self.m240speed = m240
+	
+	def drive(self):				
+		if self.debug: print "0======> ", math.degrees(self.m0angle), self.m0speed
+		if self.debug: print "120====> ", math.degrees(self.m120angle), self.m120speed
+		if self.debug: print "240====> ", math.degrees(self.m240angle), self.m240speed
 		 
 		moveString = "" 
-		moveString += str(int(m0speed)) + ',' 
-		moveString += str(int(m120speed)) + ',' 
-		moveString += str(int(m240speed)) 
+		moveString += str(int(self.m0speed)) + ',' 
+		moveString += str(int(self.m120speed)) + ',' 
+		moveString += str(int(self.m240speed)) 
 		
 		return moveString
 		

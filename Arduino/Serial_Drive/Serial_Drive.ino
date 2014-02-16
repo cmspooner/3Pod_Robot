@@ -1,26 +1,54 @@
 // Based on Motor Test Example
 #include <AFMotor.h>
+#include <SoftwareSerial.h>
 
 AF_DCMotor motor0(3);
 AF_DCMotor motor120(4);
 AF_DCMotor motor240(1);
 
+#define BLUE_TOOTH_PWR 14
+#define BLUE_TOOTH_GND 15
+#define BLUE_TOOTH_TX 16
+#define BLUE_TOOTH_RX 17
+
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
+
+SoftwareSerial mySerial( BLUE_TOOTH_RX, BLUE_TOOTH_TX ); // RX, TX
 
 void setup() {
   Serial.begin(9600);           // set up Serial library at 9600 bps
   Serial.println("Waiting for Serial Data");
   inputString.reserve(200);
+  
+  // set the data rate for the SoftwareSerial port
+  mySerial.begin(9600);
+
+  pinMode( BLUE_TOOTH_PWR, OUTPUT );
+  pinMode( BLUE_TOOTH_GND, OUTPUT );
+  
+  digitalWrite( BLUE_TOOTH_PWR, HIGH );
+  digitalWrite( BLUE_TOOTH_GND, LOW );
 }
 
 void loop() {
+  char inChar;
+  
   if (stringComplete) {
     Serial.println(inputString);
     runSerialCommand(inputString);
     // clear the string:
     inputString = "";
     stringComplete = false;
+  }
+  
+  if (mySerial.available())
+  {
+    inChar = mySerial.read();
+    
+    inputString += inChar;
+    
+    if ( inChar == '\n' ) stringComplete = true;
   }
 }
 
@@ -55,7 +83,6 @@ void runSerialCommand(String command){
   
   rawMotorDrive(motorCommands[0], motorCommands[1], motorCommands[2], true);
 }
-
 
 void rawMotorDrive(int m0, int m120, int m240){
  if (m0 > 0){
