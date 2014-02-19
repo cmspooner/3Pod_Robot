@@ -12,7 +12,7 @@ FILE_NAME(
 /* name */ 
 'C:\\Users\\Spooner\\Documents\\Inventor\\FerretBall Robot\\3Pod\\STPs
 \\Full Motor Arm (1 inch) with Kornylak Wheel.iam.stp',
-/* time_stamp */ '2014-02-16T18:43:25-05:00',
+/* time_stamp */ '2014-02-19T10:16:19-05:00',
 /* author */ ('Spooner'),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v15.2',
@@ -9328,7 +9328,7 @@ $);
 #8457=DIRECTION('ref_axis',(1.,0.,0.));
 #8458=DIRECTION($,(0.377964473009236,-0.654653670707975,0.654653670707975));
 #8459=DIRECTION($,(1.,0.,0.));
-#8460=DIRECTION('center_axis',(0.61237243569579,0.707106781186553,0.353553390593271));
+#8460=DIRECTION('center_axis',(0.61237243569579,0.707106781186553,0.353553390593272));
 #8461=DIRECTION('ref_axis',(0.5,0.,-0.866025403784438));
 #8462=DIRECTION($,(0.5,0.,-0.866025403784438));
 #8463=DIRECTION($,(0.755928946018457,-0.654653670707974,2.28917032559171E-015));
