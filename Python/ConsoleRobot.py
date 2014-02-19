@@ -102,8 +102,8 @@ def cleanInput(input):
 
 def helper(command = None):
 	print "help - Display this help message"
-	print "xy <x> <y> [<time>] - Move on a cartesion plane, optional time in seconds, default time 0.5s"
-	print "polar <speed> <angle> [<time>] - Move on a Polar plane, optional time in seconds, default time 0.5s"
+	print "xy <x> <y>  <rotation> [<time>] - Move on a cartesion plane, optional time in seconds, default time 0.5s"
+	print "polar <speed> <angle> <rotation> [<time>] - Move on a Polar plane, optional time in seconds, default time 0.5s"
 	
 	return
 
@@ -120,19 +120,19 @@ if True: #serialPort.isOpen():
 		if input[0] == "help":
 			result = helper(input[1:])
 		elif input[0] == "xy":
-			if len(input) < 3 or len(input) > 4:
+			if len(input) < 4 or len(input) > 5:
 				print "Abnormal number of parameters, xy takes 2 or 3 arguments"
 			else:
-				robot.moveXY(input[1], input[2])
-			if len(input) > 3:
-				t = input[3]
+				robot.moveXY(input[1], input[2], input[3])
+			if len(input) > 4:
+				t = input[4]
 		elif input[0] == "polar":
-			if len(input) < 3 or len(input) > 4:
+			if len(input) < 4 or len(input) > 5:
 				print "Abnormal number of parameters, xy takes 2 or 3 arguments"
 			else:
-				robot.movePolar(input[1], input[2])
-			if len(input) > 3:
-				t = input[3]
+				robot.movePolar(input[1], input[2], input[3])
+			if len(input) > 4:
+				t = input[4]
 		elif input[0] == "quit":
 			robot.moveXY(0,0)
 			t = 0
