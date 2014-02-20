@@ -29,18 +29,36 @@ class ThreePod():
 		if coodSys == "xy":
 			return self.speedx, self.speedy, self.rot
 			
-	def movePolar(self, speed, angle):
+	def movePolar(self, speed, angle, rotate = 0):
 		self.speed = float(speed)
+		if self.speed > 255:
+			self.speed = 255
+		if self.speed < -255:
+			self.speed = -255
 		self.angle = float(math.radians(float(angle)))
+		self.speedRot = float(rotate)
 		
-		self.speedx = math.cos(self.angle)
-		self.speedy = math.sin(self.angle)
+		while (self.speed + self.speedRot > 255 
+				or self.speed + self.speedRot < -255):
+			if self.speed > 0:
+				self.speed -= 10
+			elif self.speed < 0:
+				self.speed += 10
+				
+			if self.speedRot > 0:
+				self.speedRot -= 10
+			elif self.speedRot < 0:
+				self.speedRot += 10
+			
+		self.speedx = math.cos(self.angle) * self.speed
+		self.speedy = math.sin(self.angle) * self.speed
 		
 		self.moveRaw()
 		
-	def moveXY(self, x, y):
+	def moveXY(self, x, y, rotate = 0):
 		self.speedx = float(x)
 		self.speedy = float(y)
+		self.speedRot = float(rotate)
 		
 		self.speed = math.sqrt((self.speedx**2)+(self.speedy**2))
 		if self.speed > 255:
@@ -48,20 +66,22 @@ class ThreePod():
 		if self.speed < -255:
 			self.speed = -255
 			
+		while (self.speed + self.speedRot > 255 
+				or self.speed + self.speedRot < -255):
+			if self.speed > 0:
+				self.speed -= 10
+			elif self.speed < 0:
+				self.speed += 10
+				
+			if self.speedRot > 0:
+				self.speedRot -= 10
+			elif self.speedRot < 0:
+				self.speedRot += 10
+			
 		if self.debug: print "Speed: ", self.speed
 		
-		if self.speedx != 0:
-			self.angle = math.atan(self.speedy/self.speedx)
-		else:
-			if self.speedy > 0:
-				self.angle = math.radians(90)
-			elif self.speedy < 0:
-				self.angle = math.radian(270)
 		
 		self.moveRaw()
-			
-	def moveRotate(self, speed):
-		self.speedRot = speed
 		
 	def moveRaw(self, m0 = None, m120 = None, m240 = None):
 		self.m0angle = self.angle - math.radians(0)
@@ -69,9 +89,9 @@ class ThreePod():
 		self.m240angle = self.angle - math.radians(240)
 		
 		if not m0 or not m120 or not m240:
-			self.m0speed = self.speed * math.sin(self.m0angle)
-			self.m120speed = self.speed * math.sin(self.m120angle)
-			self.m240speed = self.speed * math.sin(self.m240angle)
+			self.m0speed = self.speed * math.sin(self.m0angle) + self.speedRot
+			self.m120speed = self.speed * math.sin(self.m120angle) + self.speedRot
+			self.m240speed = self.speed * math.sin(self.m240angle) + self.speedRot
 		else:
 			self.m0speed = m0
 			self.m120speed = m120
