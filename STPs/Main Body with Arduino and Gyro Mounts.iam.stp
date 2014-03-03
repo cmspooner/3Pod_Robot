@@ -12,14 +12,14 @@ FILE_NAME(
 /* name */ 
 'C:\\Users\\Spooner\\Documents\\Inventor\\FerretBall Robot\\3Pod\\STPs
 \\Main Body with Arduino and Gyro Mounts.iam.stp',
-/* time_stamp */ '2014-02-26T18:19:34-05:00',
+/* time_stamp */ '2014-03-02T16:01:00-05:00',
 /* author */ ('Spooner'),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v15.2',
 /* originating_system */ 'Autodesk Inventor 2014',
 /* authorisation */ '');
 
-FILE_SCHEMA (('CONFIG_CONTROL_DESIGN','AUTOMOTIVE_DESIGN { 1 0 10303 214 3 1 1 }'));
+FILE_SCHEMA (('AUTOMOTIVE_DESIGN { 1 0 10303 214 3 1 1 }'));
 ENDSEC;
 
 DATA;
