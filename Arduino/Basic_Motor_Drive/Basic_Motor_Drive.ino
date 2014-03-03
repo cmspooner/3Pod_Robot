@@ -4,9 +4,9 @@
 // Based on Motor Test Example
 #include <AFMotor.h>
 
-AF_DCMotor motor0(1);
+AF_DCMotor motor0(4);
 AF_DCMotor motor120(3);
-AF_DCMotor motor240(4);
+AF_DCMotor motor240(1);
 
 void setup() {
   Serial.begin(9600);           // set up Serial library at 9600 bps
@@ -14,8 +14,8 @@ void setup() {
 
   // turn on motor
   motor0.setSpeed(200);
-  motor0.setSpeed(200);
-  motor0.setSpeed(200);
+  motor120.setSpeed(200);
+  motor240.setSpeed(200);
  
   motor0.run(RELEASE);
   motor120.run(RELEASE);
@@ -23,6 +23,37 @@ void setup() {
 }
 
 void loop() {
+  Serial.println("slow forward");
+  motor0.run(FORWARD);
+  motor120.run(FORWARD);
+  motor240.run(FORWARD);
+  motor0.setSpeed(128);
+  motor120.setSpeed(128);
+  motor240.setSpeed(128);  
+  delay(3000);
+  
+  motor0.run(RELEASE);
+  motor120.run(RELEASE);
+  motor240.run(RELEASE);
+  delay(500);
+  
+  Serial.println("fast forward");
+  motor0.run(FORWARD);
+  motor120.run(FORWARD);
+  motor240.run(FORWARD);
+  motor0.setSpeed(250);
+  motor120.setSpeed(250);
+  motor240.setSpeed(250);  
+  delay(3000);
+  
+  motor0.run(RELEASE);
+  motor120.run(RELEASE);
+  motor240.run(RELEASE);
+  delay(500);
+  
+  
+  
+  /*
   uint8_t i;
   
   Serial.print("tick");
@@ -69,4 +100,5 @@ void loop() {
   motor120.run(RELEASE);
   motor240.run(RELEASE);
   delay(1000);
+  */
 }
